@@ -2,14 +2,26 @@ package com.baron.service;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import com.baron.model.APIServiceType;
 import com.baron.model.BrowserType;
 import com.baron.model.LogModel;
+import com.baron.model.OutputModel;
 import com.baron.model.StatusType;
 
 public class LogAnalyzer {
+	private Map<String, Integer> apiKeyMap;
+	private Map<StatusType, Integer> statusCodeResultMap;
 
+	public LogAnalyzer() {
+		apiKeyMap = new HashMap<String, Integer>();
+//		statusCodeResultMap = new 
+	}
+	
+	
 	public LogModel convertLog(String log) {
 
 		LogModel model = new LogModel();
@@ -60,7 +72,21 @@ public class LogAnalyzer {
 		return log.substring(1, log.length() - 1).split("\\]\\[");
 	}
 
-	public void analyze(LogModel model) {
+	public OutputModel analyze(LogModel model) {
+		OutputModel result = new OutputModel();
 		
+		String apiKey = model.getApiKey();
+		int callNumber = 1;
+		if (apiKeyMap.containsKey(apiKey)) {
+			callNumber += apiKeyMap.get(apiKey);
+		}
+		apiKeyMap.put(apiKey, callNumber);
+		
+		
+		//TODO : 분석기 개발작업 진행할 차례
+		
+		
+		
+		return result;
 	}
 }

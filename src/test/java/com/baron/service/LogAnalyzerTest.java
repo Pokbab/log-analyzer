@@ -10,6 +10,7 @@ import org.junit.Test;
 import com.baron.model.APIServiceType;
 import com.baron.model.BrowserType;
 import com.baron.model.LogModel;
+import com.baron.model.OutputModel;
 import com.baron.model.StatusType;
 
 
@@ -29,7 +30,9 @@ public class LogAnalyzerTest {
 	public void testAnalyze() throws Exception {
 		LogModel model = getDummyLogModel();
 		
-		analyzer.analyze(model);
+		OutputModel actual = analyzer.analyze(model);
+		
+		assertNotNull(actual);
 	}
 	
 	private LogModel getDummyLogModel() {

@@ -42,7 +42,7 @@ public class LogAnalyzerTest {
 		model.setApiKey("e3ea");
 		model.setQuery("daum");
 		model.setBrowserType(BrowserType.IE);
-		model.setCallTime(LocalDateTime.of(2009, 06, 10, 10, 11, 10));
+		model.setCallTime(LocalDateTime.of(2009, 06, 10, 10, 11));
 		
 		return model;
 	}

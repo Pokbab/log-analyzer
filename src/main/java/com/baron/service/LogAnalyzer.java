@@ -2,11 +2,15 @@ package com.baron.service;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.LinkedHashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
-import java.util.TreeMap;
+import java.util.Map.Entry;
 
 import com.baron.model.APIServiceType;
 import com.baron.model.BrowserType;
@@ -15,31 +19,11 @@ import com.baron.model.OutputModel;
 import com.baron.model.StatusType;
 
 public class LogAnalyzer {
-	private Map<String, Integer> apiKeyMap;
-	private Map<StatusType, Integer> statusCodeResultMap;
-	private Map<APIServiceType, Integer> apiServiceMap;
-	private Map<LocalDateTime, Integer> callTimeMap;
-	private Map<BrowserType, Integer> usedBrowserMap;
 
-	public LogAnalyzer() {
-		apiKeyMap = new HashMap<String, Integer>();
-		
-		statusCodeResultMap = new LinkedHashMap<StatusType, Integer>();
-		statusCodeResultMap.put(StatusType.INVALID, 0);
-		statusCodeResultMap.put(StatusType.SUCCESS, 0);
-		statusCodeResultMap.put(StatusType.NO_PAGE, 0);
-		
-		apiServiceMap = new HashMap<APIServiceType, Integer>();
-		callTimeMap = new HashMap<LocalDateTime, Integer>();
-		usedBrowserMap = new LinkedHashMap<BrowserType, Integer>();
-	}
-	
-	
 	public LogModel convertLog(String log) {
 
 		LogModel model = new LogModel();
 		String[] logItems = splitLog(log);
-		
 		
 		//[200]
 		//[http://apis.daum.net/search/vclip?apikey=2jdc&q=daum]
@@ -85,37 +69,15 @@ public class LogAnalyzer {
 		return log.substring(1, log.length() - 1).split("\\]\\[");
 	}
 
-	public OutputModel analyze(LogModel model) {
-		OutputModel result = new OutputModel();
-		
-		// apiKey 가산기
-		addNumber(model.getApiKey(), this.apiKeyMap);
-		
-		// status 가산기
-		addNumber(model.getStatusType(), this.statusCodeResultMap);
-		
-		// apiService 가산기
-		addNumber(model.getApiServiceType(), this.apiServiceMap);
-		
-		// 호출시간 가산기
-		addNumber(model.getCallTime(), this.callTimeMap);
-		
-		// 사용된브라우저 가산기
-		addNumber(model.getBrowserType(), this.usedBrowserMap);
-		
-		
-		TreeMap tp = new 
-		
-		
-		
-		return result;
+	public void addResultToRepository(List<LogModel> logModelList, ResultRepository repository) {
+		for (LogModel logModel : logModelList) {
+			repository.addAnalyzeResult(logModel);
+		}
 	}
 
-	private <T> void addNumber(T value, Map<T, Integer> map) {
-		int callNumber = 1;
-		if (map.containsKey(value)) {
-			callNumber += map.get(value);
-		}
-		map.put(value, callNumber);
+	public OutputModel analyze(ResultRepository repository) {
+
+		
+		return null;
 	}
 }

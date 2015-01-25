@@ -5,11 +5,14 @@ import java.io.IOException;
 import java.time.format.DateTimeFormatter;
 import java.util.Map;
 
+import org.springframework.stereotype.Service;
+
 import com.baron.model.APIServiceType;
 import com.baron.model.BrowserType;
 import com.baron.model.OutputModel;
 import com.baron.model.StatusType;
 
+@Service
 public class LogWriter {
 
 	public boolean writeLogFile(OutputModel model) {

@@ -10,7 +10,11 @@ import java.util.Map.Entry;
 
 public class MapUtil {
 	
-	public static <K, V> Map<K, V> sortByValue(Map<K, V> unsortedMap) {	 
+	public enum SortType {
+		ASC, DESC;
+	}
+	
+	public static <K, V> LinkedHashMap<K, V> sortByValue(Map<K, V> unsortedMap, SortType sortType) {	 
 		List<Entry<K, V>> list = new LinkedList<Entry<K, V>>(unsortedMap.entrySet());
 	 
 		Collections.sort(list, new Comparator<Entry<K, V>>() {
@@ -21,11 +25,16 @@ public class MapUtil {
 						.compareTo((entry2).getValue());
 			}
 		});
+
+		if (sortType == SortType.DESC) {
+			Collections.reverse(list);
+		}
 	 
-		Map<K, V> sortedMap = new LinkedHashMap<K, V>();
+		LinkedHashMap<K, V> sortedMap = new LinkedHashMap<K, V>();
 		for (Entry<K, V> entry : list) {
 			sortedMap.put(entry.getKey(), entry.getValue());
 		}
+		
 		return sortedMap;
 	}
 }

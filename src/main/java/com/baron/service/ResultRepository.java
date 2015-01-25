@@ -16,6 +16,7 @@ public class ResultRepository {
 	private Map<APIServiceType, Integer> apiServiceMap;
 	private Map<LocalDateTime, Integer> callTimeMap;
 	private Map<BrowserType, Integer> usedBrowserMap;
+	private int totalCallNumber;
 	
 	public ResultRepository() {
 		apiKeyMap = new HashMap<String, Integer>();
@@ -45,9 +46,14 @@ public class ResultRepository {
 		
 		// 사용된브라우저 가산기
 		addNumber(model.getBrowserType(), getUsedBrowserMap());
+		totalCallNumber++;
 	}
 	
 	private <T> void addNumber(T value, Map<T, Integer> map) {
+		if (value == null) {
+			return;
+		}
+		
 		int callNumber = 1;
 		if (map.containsKey(value)) {
 			callNumber += map.get(value);
@@ -73,5 +79,9 @@ public class ResultRepository {
 
 	public Map<BrowserType, Integer> getUsedBrowserMap() {
 		return usedBrowserMap;
+	}
+	
+	public int getTotalCallNumber() {
+		return totalCallNumber;
 	}
 }

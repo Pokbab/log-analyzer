@@ -29,7 +29,7 @@ public class LogWriterTest {
 		
 		Map<APIServiceType, Integer> requestCountPerApiServiceMap = new LinkedHashMap<APIServiceType, Integer>();
 		requestCountPerApiServiceMap.put(APIServiceType.BLOG, 1224);
-		requestCountPerApiServiceMap.put(APIServiceType.VDIP, 871);
+		requestCountPerApiServiceMap.put(APIServiceType.VCLIP, 871);
 		requestCountPerApiServiceMap.put(APIServiceType.IMAGE, 705);
 		model.setRequestCountPerApiServiceMap(requestCountPerApiServiceMap);
 		

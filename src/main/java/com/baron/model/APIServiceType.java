@@ -10,5 +10,5 @@ public enum APIServiceType {
 	IMAGE,
 	KNOWLEDGE,
 	NEWS,
-	VDIP
+	VCLIP
 }

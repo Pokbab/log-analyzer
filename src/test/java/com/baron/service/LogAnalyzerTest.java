@@ -4,13 +4,11 @@ import static org.junit.Assert.*;
 
 import java.time.LocalDateTime;
 
-import org.junit.Before;
 import org.junit.Test;
 
 import com.baron.model.APIServiceType;
 import com.baron.model.BrowserType;
 import com.baron.model.LogModel;
-import com.baron.model.OutputModel;
 import com.baron.model.StatusType;
 
 
@@ -27,12 +25,12 @@ public class LogAnalyzerTest {
 	}
 	
 	@Test
-	public void testAnalyze() throws Exception {
-		LogModel model = getDummyLogModel();
+	public void testConvertLog_상태코드가_200이_아니면_더이상의_로그분석을_하지않는다() throws Exception {
+		String log = "[404][http://apis.daum.net/search/aaaaapikey=jg9k&q=daum][Opera][2009-06-10 09:58:45]";
 		
-		OutputModel actual = analyzer.analyze(model);
+		LogModel actual = analyzer.convertLog(log);
 		
-		assertNotNull(actual);
+		assertEquals(StatusType.NO_PAGE, actual.getStatusType());
 	}
 	
 	private LogModel getDummyLogModel() {
